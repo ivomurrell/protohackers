@@ -1,2 +1,18 @@
-[workspace]
-members = ["[0-9][0-9]"]
+[package]
+name = "protohackers"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+lazy_static = "1.4.0"
+num-bigint = { version = "0.4.3", features = ["serde"] }
+num-iter = "0.1.43"
+num-traits = "0.2.15"
+regex = "1.6.0"
+serde = { version = "1.0.145", features = ["derive"] }
+serde_json = { version = "1.0.85", features = ["arbitrary_precision"] }
+tokio = { version = "1.21.2", features = ["full"] }
+tracing = "0.1.36"
+tracing-subscriber = "0.3.15"
