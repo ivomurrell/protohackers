@@ -8,20 +8,15 @@ kill_timeout = 5
 
 [[services]]
   internal_port = 10000
-  protocol = "tcp"
-  [services.concurrency]
-    hard_limit = 25
-    soft_limit = 20
-
   [[services.ports]]
     port = 10000
 
 [[services]]
   internal_port = 10001
-  protocol = "tcp"
-  [services.concurrency]
-    hard_limit = 25
-    soft_limit = 20
-
   [[services.ports]]
     port = 10001
+
+[[services]]
+  internal_port = 10002
+  [[services.ports]]
+    port = 10002
