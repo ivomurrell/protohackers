@@ -20,11 +20,10 @@ pub async fn run() {
         .await
         .expect("failed to bind socket");
     loop {
-        let (mut socket, _) = listener
+        let (mut socket, addr) = listener
             .accept()
             .await
             .expect("failed to accept connection");
-        let addr = socket.peer_addr().expect("failed to get peer address");
 
         let tx = tx.clone();
         let user_list = Arc::clone(&user_list);

@@ -19,11 +19,10 @@ pub async fn run() {
         .await
         .expect("failed to bind socket");
     loop {
-        let (mut socket, _) = listener
+        let (mut socket, addr) = listener
             .accept()
             .await
             .expect("failed to accept connection");
-        let addr = socket.peer_addr().expect("failed to get peer address");
         tokio::spawn(
             async move {
                 info!("accepted connection");
