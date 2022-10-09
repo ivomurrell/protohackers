@@ -5,6 +5,7 @@ kill_signal = "SIGINT"
 kill_timeout = 5
 
 [env]
+  FLY = "true"
 
 [[services]]
   internal_port = 10000
@@ -25,3 +26,9 @@ kill_timeout = 5
   internal_port = 10003
   [[services.ports]]
     port = 10003
+
+[[services]]
+  protocol = "udp"
+  internal_port = 10004
+  [[services.ports]]
+    port = 10004
