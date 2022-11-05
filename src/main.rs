@@ -6,6 +6,7 @@ use crate::problems::p02;
 use crate::problems::p03;
 use crate::problems::p04;
 use crate::problems::p05;
+use crate::problems::p06;
 
 #[tokio::main]
 async fn main() {
@@ -17,6 +18,7 @@ async fn main() {
         tokio::spawn(p02::run()),
         tokio::spawn(p03::run()),
         tokio::spawn(p04::run()),
-        tokio::spawn(p05::run())
+        tokio::spawn(p05::run()),
+        tokio::spawn(p06::run())
     );
 }

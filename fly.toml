@@ -37,3 +37,12 @@ kill_timeout = 5
   internal_port = 10005
   [[services.ports]]
     port = 10005
+
+[[services]]
+  internal_port = 10006
+  [[services.ports]]
+    port = 10006
+  [services.concurrency]
+    type = "connections"
+    hard_limit = 200
+    soft_limit = 150
