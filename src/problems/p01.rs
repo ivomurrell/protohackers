@@ -1,6 +1,6 @@
-use lazy_static::lazy_static;
 use num_bigint::BigInt;
 use num_traits::{One, Zero};
+use once_cell::sync::Lazy;
 use regex::Regex;
 use serde::{de::Error, Deserialize, Deserializer, Serialize};
 use serde_json::Number;
@@ -28,10 +28,8 @@ fn deserialise_big_int<'de, D: Deserializer<'de>>(
 ) -> Result<Option<BigInt>, D::Error> {
     let n = Number::deserialize(deserialiser)?;
     let string = n.to_string();
-    lazy_static! {
-        static ref DECIMAL_RE: Regex =
-            Regex::new(r"^(-?\d+)(?:\.(\d*))?$").expect("failed to compile regex");
-    }
+    static DECIMAL_RE: Lazy<Regex> =
+        Lazy::new(|| Regex::new(r"^(-?\d+)(?:\.(\d*))?$").expect("failed to compile regex"));
     let caps = DECIMAL_RE
         .captures(&string)
         .expect("stringified number had no digits");

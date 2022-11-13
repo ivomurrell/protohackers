@@ -1,6 +1,6 @@
 use std::borrow::Cow;
 
-use lazy_static::lazy_static;
+use once_cell::sync::Lazy;
 use regex::{Captures, Regex};
 use tokio::{
     io::{AsyncBufReadExt, AsyncWriteExt, BufReader},
@@ -9,9 +9,8 @@ use tokio::{
 use tracing::{debug, info, instrument, Instrument};
 
 fn rewrite_addresses(message: &str) -> Cow<'_, str> {
-    lazy_static! {
-        static ref RE: Regex = Regex::new(r"\b7\w{25,34}\b").expect("failed to compile regex");
-    }
+    static RE: Lazy<Regex> =
+        Lazy::new(|| Regex::new(r"\b7\w{25,34}\b").expect("failed to compile regex"));
     RE.replace_all(message, |caps: &Captures| {
         let address = caps.get(0).expect("no string was captured");
         let start = address.start();
