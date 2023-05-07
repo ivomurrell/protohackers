@@ -3,7 +3,9 @@ FROM rust:1.64 as builder
 WORKDIR /usr/src/protohackers
 COPY . .
 
-RUN cargo install --profile release --locked --path .
+RUN --mount=type=cache,target=/usr/local/cargo/registry \
+    --mount=type=cache,target=/usr/src/protohackers/target \
+    cargo install --profile release --locked --path .
 
 
 FROM debian:bullseye-slim
