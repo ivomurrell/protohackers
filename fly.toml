@@ -46,3 +46,9 @@ kill_timeout = 5
     type = "connections"
     hard_limit = 200
     soft_limit = 150
+
+[[services]]
+  protocol = "udp"
+  internal_port = 10007
+  [[services.ports]]
+    port = 10007
