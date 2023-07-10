@@ -354,7 +354,6 @@ dependencies = [
  "num-bigint",
  "num-iter",
  "num-traits",
- "once_cell",
  "regex",
  "serde",
  "serde_json",

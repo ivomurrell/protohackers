@@ -1,9 +1,9 @@
 use num_bigint::BigInt;
 use num_traits::{One, Zero};
-use once_cell::sync::Lazy;
 use regex::Regex;
 use serde::{de::Error, Deserialize, Deserializer, Serialize};
 use serde_json::Number;
+use std::sync::OnceLock;
 use tokio::{
     io::{AsyncBufReadExt, AsyncWriteExt, BufReader},
     net::TcpListener,
@@ -28,9 +28,10 @@ fn deserialise_big_int<'de, D: Deserializer<'de>>(
 ) -> Result<Option<BigInt>, D::Error> {
     let n = Number::deserialize(deserialiser)?;
     let string = n.to_string();
-    static DECIMAL_RE: Lazy<Regex> =
-        Lazy::new(|| Regex::new(r"^(-?\d+)(?:\.(\d*))?$").expect("failed to compile regex"));
-    let caps = DECIMAL_RE
+    static DECIMAL_RE: OnceLock<Regex> = OnceLock::new();
+    let regex = DECIMAL_RE
+        .get_or_init(|| Regex::new(r"^(-?\d+)(?:\.(\d*))?$").expect("failed to compile regex"));
+    let caps = regex
         .captures(&string)
         .expect("stringified number had no digits");
     if let Some(decimal) = caps.get(2) {
