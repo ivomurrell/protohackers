@@ -9,9 +9,21 @@ use crate::problems::p05;
 use crate::problems::p06;
 use crate::problems::p07;
 
+use tracing_error::ErrorLayer;
+use tracing_subscriber::{layer::SubscriberExt, util::SubscriberInitExt, EnvFilter};
+
 #[tokio::main]
 async fn main() {
-    tracing_subscriber::fmt::init();
+    let fmt_layer = tracing_subscriber::fmt::layer().with_target(false);
+    let filter_layer = EnvFilter::try_from_default_env()
+        .or_else(|_| EnvFilter::try_new("info"))
+        .unwrap();
+
+    tracing_subscriber::registry()
+        .with(filter_layer)
+        .with(fmt_layer)
+        .with(ErrorLayer::default())
+        .init();
 
     let _ = tokio::join!(
         tokio::spawn(p00::run()),

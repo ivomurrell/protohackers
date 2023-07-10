@@ -16,4 +16,5 @@ serde = { version = "1.0.147", features = ["derive"] }
 serde_json = { version = "1.0.87", features = ["arbitrary_precision"] }
 tokio = { version = "1.21.2", features = ["full"] }
 tracing = "0.1.37"
-tracing-subscriber = "0.3.16"
+tracing-error = "0.2.0"
+tracing-subscriber = { version = "0.3.16", features = ["env-filter"] }
