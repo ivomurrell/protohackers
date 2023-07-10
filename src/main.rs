@@ -25,6 +25,8 @@ async fn main() {
         .with(ErrorLayer::default())
         .init();
 
+    color_eyre::install().expect("failed to install panic handler");
+
     let _ = tokio::join!(
         tokio::spawn(p00::run()),
         tokio::spawn(p01::run()),
