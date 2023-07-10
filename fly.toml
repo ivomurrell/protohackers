@@ -1,6 +1,7 @@
 # fly.toml file generated for protohackers-ivo on 2022-10-03T22:53:21+01:00
 
 app = "protohackers-ivo"
+primary_region = "lhr"
 kill_signal = "SIGINT"
 kill_timeout = 5
 
