@@ -55,3 +55,8 @@ kill_timeout = 5
   internal_port = 10007
   [[services.ports]]
     port = 10007
+
+[[services]]
+  internal_port = 10008
+    [[services.ports]]
+        port = 10008

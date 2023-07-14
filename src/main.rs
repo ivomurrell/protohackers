@@ -8,6 +8,7 @@ use crate::problems::p04;
 use crate::problems::p05;
 use crate::problems::p06;
 use crate::problems::p07;
+use crate::problems::p08;
 
 use tracing_error::ErrorLayer;
 use tracing_subscriber::{layer::SubscriberExt, util::SubscriberInitExt, EnvFilter};
@@ -35,6 +36,7 @@ async fn main() {
         tokio::spawn(p04::run()),
         tokio::spawn(p05::run()),
         tokio::spawn(p06::run()),
-        tokio::spawn(p07::run())
+        tokio::spawn(p07::run()),
+        tokio::spawn(p08::run())
     );
 }
